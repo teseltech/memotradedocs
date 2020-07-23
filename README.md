@@ -17,6 +17,10 @@ El recuadro de formulas esta listo para ser copiado y pegado en el resto de las 
 3. Calcula la _Utilidad Semanal_ dentro del rango determinado por la semana calculada sumando y filtrando la columna `D`
 4. Calcula el _Rendimiento Semanal_ dividiendo la _Utilidad Semanal_ por el último saldo registrado para la semana anterior
 
+Esta colocado en la celda H2, al igual que en resto de las hojas. Al momento de copiar, se deberá hacer con las celdas de "ÚLTIMA SEMANA" incluidas, de lo contrario las fórmulas no funcionarán.
+
+**NOTA: No es necesario editar ninguna de estas fórmulas para ninguna de las funcionalidades descritas anteriormente.**
+
 ## El menú `Fijar Fechas`
 
 ![Menú de fórmulas][menu]
