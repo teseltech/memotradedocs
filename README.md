@@ -55,9 +55,91 @@ La función `FACTURACIONTOTAL()` toma un solo argumento, esta es la celda que _b
 
 Por ejemplo. En un libro con las hojas: `Hoja1`, `Hoja2`, `Hoja3` y la función se utiliza en la `Hoja1` el resultado de `=FACTURACIONTOTAL(H2)` será el mismo que `=Hoja2!H2 + Hoja3!H3`
 
+---
+
+## Copiar y Pegar al Scripts Editor
+
+Para que las funciones sean utilizables en los spreadsheets es necesario copiar y pegar este código en el Scripts Editor
+
+![Script Editor][script]
+
+```
+/**
+ * Capitaliza un valor númerico desde la fecha de aportación hasta la fecha requerida.
+ * Puede tener todas las aportaciones necesarias
+ *
+ * @param {0.05} tasa El valor de la tasa de interés
+ * @param {"25/7/2020"} fecha_actual La fecha hasta la que se van a capitalizar las aportaciones
+
+ * @param {1000} k1 La aportación a capitalizar
+ * @param {"18/7/2020"} d1 La fecha de aportación
+
+ * @param {"21/7/2020"} d2 La fecha hasta la que se van a capitalizar las aportación 2 – Opcional
+ * @param {200} k2 La segunda aportación a capitalizar – Opcional
+
+ * @return Regresa la suma de las aportaciones capitalizadas.
+ * @customfunction
+ */
+function RENDIMIENTOS(tasa, fecha_actual,k1,d1,k2,d2) {
+
+  rendimiento = 0
+  for(var arg = 2; arg < arguments.length; arg += 2)
+  {
+    var delta = Math.abs(fecha_actual - arguments[arg + 1]) / 1000;
+    var days = Math.floor(delta / 86400);
+
+    rendimiento += arguments[arg] * tasa * days/7
+
+  }  
+
+  return rendimiento
+}
+
+function onOpen() {
+  var UI= SpreadsheetApp.getUi();
+  UI.createMenu('Automatización')
+      .addItem('Fijar Fechas', 'FijarFechas')
+      .addToUi();
+}
+
+function FijarFechas() {
+
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  for (let spreadsheet of sheets) {
+    spreadsheet.getRange('A:A').activate();
+    spreadsheet.getRange('A:A').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+  }
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.alert('Éxito','Se han fijado las fechas', ui.ButtonSet.OK);
+
+}
+
+/**
+ * Regresa la suma de todas las celdas que corresponden a 'range' en todas las hojas
+ *
+ * @param {"H2"} range La celda que se va a sumar de todas las hojas
+
+ * @return La suma de la celda range .
+ * @customfunction
+ */
+function FACTURACIONTOTAL(range) {
+
+  thisSheet = SpreadsheetApp.getActiveSheet();
+  let s = 0;
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  for (let spreadsheet of sheets) {
+    if (spreadsheet.getSheetName() != thisSheet.getSheetName()) {
+      s += parseFloat(spreadsheet.getRange(range).getValue());
+    }
+
+  }
+  return s
+}
+```
 
 [recuadro]: recuadro.png
 [menu]: menu.png
 [rendimientos1]: rendimientos_1.png
 [rendimientos2]: rendimientos_2.png
 [facturacion]: facturacion.png
+[script]: script.png
