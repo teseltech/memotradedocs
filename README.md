@@ -1,4 +1,4 @@
-Automatizaciónes hojas de saldos
+Automatizaciones hojas de saldos
 ================================
 
 Las automatizaciones al 2020/07/23 consisten de cuatro partes:  
@@ -11,13 +11,13 @@ Las automatizaciones al 2020/07/23 consisten de cuatro partes:
 
 ![El recuadro de fórmulas][recuadro]
 
-El recuadro de formulas esta listo para ser copiado y pegado en el resto de las hojas de los libros. Este recuadro:
-1. Calcula cual fue la última semana completa a partir de la fecha más reciente en la columna `A`
+El recuadro de fórmulas esta listo para ser copiado y pegado en el resto de las hojas de los libros. Este recuadro:
+1. Calcula cuál fue la última semana completa a partir de la fecha más reciente en la columna `A`
 2. Toma la _Inversión Activa_ a partir de la última celda de la columna `F`
 3. Calcula la _Utilidad Semanal_ dentro del rango determinado por la semana calculada sumando y filtrando la columna `D`
 4. Calcula el _Rendimiento Semanal_ dividiendo la _Utilidad Semanal_ por el último saldo registrado para la semana anterior
 
-Esta colocado en la celda H2, al igual que en resto de las hojas. Al momento de copiar, se deberá hacer con las celdas de "ÚLTIMA SEMANA" incluidas, de lo contrario las fórmulas no funcionarán.
+Está colocado en la celda H2, al igual que en resto de las hojas. Al momento de copiar, se deberá hacer con las celdas de "ÚLTIMA SEMANA" incluidas, de lo contrario las fórmulas no funcionarán.
 
 **NOTA: No es necesario editar ninguna de estas fórmulas para ninguna de las funcionalidades descritas anteriormente.**
 
@@ -26,9 +26,9 @@ Esta colocado en la celda H2, al igual que en resto de las hojas. Al momento de 
 ![Menú de fórmulas][menu]
 
 Este menú carga unos segundos después de abrir el spreadsheet.
-Una vez que se desee convertir **todas** las fechas del spreadsheet a valores fijos es puede dar click a este botón.
+Una vez que se desee convertir **todas** las fechas del spreadsheet a valores fijos se puede dar click a este botón.
 
-Es importante recordar que si se estan utilizando fórmulas como `TODAY()` estas fórmulas se actualizarán al volver abrir el documento, de modo que es importante fijarlas antes de cerrar el spreadsheet.
+Es importante recordar que si se están utilizando fórmulas como `TODAY()`, estas fórmulas se actualizarán al volver abrir el documento, de modo que es importante fijarlas antes de cerrar el spreadsheet.
 
 ## La función `RENDIMIENTOS`
 
@@ -57,7 +57,7 @@ Estos dos últimos parámetros se pueden  repetir tantas veces como sea necesari
 
 La función `FACTURACIONTOTAL()` toma un solo argumento, esta es la celda que _buscará_ en el resto del spreadsheet. Esta función **no** suma la hoja en la que es utilizada.
 
-Por ejemplo. En un libro con las hojas: `Hoja1`, `Hoja2`, `Hoja3` y la función se utiliza en la `Hoja1` el resultado de `=FACTURACIONTOTAL(H2)` será el mismo que `=Hoja2!H2 + Hoja3!H3`
+Por ejemplo, si en un libro con las hojas: `Hoja1`, `Hoja2` y `Hoja3` la función se utiliza en la `Hoja1`, el resultado de `=FACTURACIONTOTAL(H2)` será el mismo que `=Hoja2!H2 + Hoja3!H3`
 
 ---
 
