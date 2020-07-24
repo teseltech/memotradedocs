@@ -74,16 +74,16 @@ Para que las funciones sean utilizables en los spreadsheets es necesario copiar 
  *
  * @param {0.05} tasa El valor de la tasa de interés
  * @param {"25/7/2020"} fecha_actual La fecha hasta la que se van a capitalizar las aportaciones
-
+ *
  * @param {1000} k1 La aportación a capitalizar
  * @param {"18/7/2020"} d1 La fecha de aportación
-
+ *
  * @param {"21/7/2020"} d2 La fecha hasta la que se van a capitalizar las aportación 2 – Opcional
  * @param {200} k2 La segunda aportación a capitalizar – Opcional
-
+ *
  * @return Regresa la suma de las aportaciones capitalizadas.
  * @customfunction
- */
+*/
 function RENDIMIENTOS(tasa, fecha_actual,k1,d1,k2,d2) {
 
   rendimiento = 0
@@ -102,16 +102,16 @@ function RENDIMIENTOS(tasa, fecha_actual,k1,d1,k2,d2) {
 function onOpen() {
   var UI= SpreadsheetApp.getUi();
   UI.createMenu('Automatización')
-      .addItem('Fijar Fechas', 'FijarFechas')
-      .addToUi();
+  .addItem('Fijar Fechas', 'FijarFechas')
+  .addToUi();
 }
 
 function FijarFechas() {
 
   var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
-  for (let spreadsheet of sheets) {
-    spreadsheet.getRange('A:A').activate();
-    spreadsheet.getRange('A:A').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+  for (var i = 0; i < sheets.length ; i++ ) {
+    var spreadsheet = sheets[i];
+    spreadsheet.getRange('A:A').copyTo(spreadsheet.getRange('A:A'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
   }
   var ui = SpreadsheetApp.getUi();
   var response = ui.alert('Éxito','Se han fijado las fechas', ui.ButtonSet.OK);
@@ -122,16 +122,17 @@ function FijarFechas() {
  * Regresa la suma de todas las celdas que corresponden a 'range' en todas las hojas
  *
  * @param {"H2"} range La celda que se va a sumar de todas las hojas
-
+ *
  * @return La suma de la celda range .
  * @customfunction
- */
+*/
 function FACTURACIONTOTAL(range) {
 
   thisSheet = SpreadsheetApp.getActiveSheet();
-  let s = 0;
+  var s = 0;
   var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
-  for (let spreadsheet of sheets) {
+  for (var i = 0; i < sheets.length ; i++ ) {
+    var spreadsheet = sheets[i];
     if (spreadsheet.getSheetName() != thisSheet.getSheetName()) {
       s += parseFloat(spreadsheet.getRange(range).getValue());
     }
@@ -139,6 +140,7 @@ function FACTURACIONTOTAL(range) {
   }
   return s
 }
+
 ```
 
 [recuadro]: recuadro.png
