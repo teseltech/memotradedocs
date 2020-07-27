@@ -119,12 +119,19 @@ function FijarFechas() {
   var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
   for (var i = 0; i < sheets.length ; i++ ) {
     var spreadsheet = sheets[i];
-    spreadsheet.getRange('A:A').copyTo(spreadsheet.getRange('A:A'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
-    spreadsheet.getRange('A:A').setNumberFormat('d/M/yyyy');
+    var spreadsheetName = spreadsheet.getName();
 
-    var currency = spreadsheet.getRange('C2').getNumberFormat();
-    spreadsheet.getRange('C:F').copyTo(spreadsheet.getRange('C:F'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
-    spreadsheet.getRange('C:F').setNumberFormat(currency);
+    if (spreadsheetName.substring(0,2) == 'RT') {
+
+      var spreadsheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(spreadsheetName.substring(3));
+
+      spreadsheet.getRange('A:A').copyTo(spreadsheet.getRange('A:A'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      spreadsheet.getRange('A:A').setNumberFormat('d/M/yyyy');
+
+      var currency = spreadsheet.getRange('C2').getNumberFormat();
+      spreadsheet.getRange('C:F').copyTo(spreadsheet.getRange('C:F'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      spreadsheet.getRange('C:F').setNumberFormat(currency);
+    }
   }
   var ui = SpreadsheetApp.getUi();
   var response = ui.alert('Éxito','Se han fijado las fechas', ui.ButtonSet.OK);
