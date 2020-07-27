@@ -23,12 +23,19 @@ Está colocado en la celda H2, al igual que en resto de las hojas. Al momento de
 
 ## El menú `Fijar Fechas`
 
-![Menú de fórmulas][menu]
+![Menú Fijar Fechas][menu]
 
 Este menú carga unos segundos después de abrir el spreadsheet.
 Una vez que se desee convertir **todas** las fechas del spreadsheet a valores fijos se puede dar click a este botón.
 
 Es importante recordar que si se están utilizando fórmulas como `TODAY()`, estas fórmulas se actualizarán al volver abrir el documento, de modo que es importante fijarlas antes de cerrar el spreadsheet.
+
+## El menú `Llenar Hojas RT`
+
+![El menú Llenar hojas RT][hojasrt]
+
+Este menú carga unos segundos después de abrir el spreadsheet.
+Antes de _publicar_ las actualizaciones presione este botón para que se copien los valores de las **Hojas Princiales** a las **Hojas RT** esta es una copia de valores y formatos, no de fórmulas. Esto garantiza que se muestren correctamente los valores en Wordpress.
 
 ## La función `RENDIMIENTOS`
 
@@ -174,6 +181,7 @@ function FACTURACIONTOTAL(range) {
 
 [recuadro]: recuadro.png
 [menu]: menu.png
+[hojasrt]: hojasrt.png
 [rendimientos1]: rendimientos_1.png
 [rendimientos2]: rendimientos_2.png
 [facturacion]: facturacion.png
