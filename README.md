@@ -102,7 +102,8 @@ function RENDIMIENTOS(tasa, fecha_actual,k1,d1,k2,d2) {
 function onOpen() {
   var UI= SpreadsheetApp.getUi();
   UI.createMenu('Automatización')
-  .addItem('Fijar Fechas', 'FijarFechas')
+  .addItem('Fijar Fechas', 'FijarFechas')   // Agregar menú de Fijar Fechas
+  .addItem('Llenar hojas RT', 'LlenarRT')   // Agregar menú de copiar valores
   .addToUi();
 }
 
@@ -121,6 +122,30 @@ function FijarFechas() {
   var ui = SpreadsheetApp.getUi();
   var response = ui.alert('Éxito','Se han fijado las fechas', ui.ButtonSet.OK);
 
+}
+
+function LlenarRT() {
+  var sheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
+  for (var i = 0; i < sheets.length ; i++ ) {
+
+    var spreadsheet = sheets[i];
+    var spreadsheetName = spreadsheet.getName();
+
+    if (spreadsheetName.substring(0,2) == 'RT') {
+      var sourceSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(spreadsheetName.substring(3));
+      var destinationSheet = spreadsheet;
+
+      sourceSheet.getRange('H1:K2').copyTo(destinationSheet.getRange('A1'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      sourceSheet.getRange('H1:K2').copyTo(destinationSheet.getRange('A1'), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
+
+      sourceSheet.getRange('H4:K5').copyTo(destinationSheet.getRange('A4'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      sourceSheet.getRange('H4:K5').copyTo(destinationSheet.getRange('A4'), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
+
+      sourceSheet.getRange('H7:K8').copyTo(destinationSheet.getRange('A7'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      sourceSheet.getRange('H7:K8').copyTo(destinationSheet.getRange('A7'), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
+    }
+
+  }
 }
 
 /**
