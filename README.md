@@ -123,13 +123,17 @@ function FijarFechas() {
 
     if (spreadsheetName.substring(0,2) == 'RT') {
 
-      var spreadsheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(spreadsheetName.substring(3));
+      var spreadsheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(spreadsheetName.substring(3).trim());
+      if (spreadsheet==null) {
+        var ui = SpreadsheetApp.getUi();
+        ui.alert('Error', "No se ha encontrado una Hoja Principal para esta hoja RT: " + "\"" + spreadsheetName.substring(3) +"\"", ui.ButtonSet.OK);
+      }
 
       spreadsheet.getRange('A:A').copyTo(spreadsheet.getRange('A:A'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
       spreadsheet.getRange('A:A').setNumberFormat('d/M/yyyy');
 
       var currency = spreadsheet.getRange('C2').getNumberFormat();
-      spreadsheet.getRange('C:F').copyTo(spreadsheet.getRange('C:F'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      spreadsheet.getRange('C:E').copyTo(spreadsheet.getRange('C:E'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
       spreadsheet.getRange('C:F').setNumberFormat(currency);
     }
   }
