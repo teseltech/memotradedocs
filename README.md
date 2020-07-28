@@ -147,12 +147,13 @@ function LlenarRT() {
 
     if (spreadsheetName.substring(0,2) == 'RT') {
       var sourceSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(spreadsheetName.substring(3).trim());
-      var sourceSheetName = sourceSheet.getName();
       var destinationSheet = spreadsheet;
 
       if(sourceSheet==null) {
         var ui = SpreadsheetApp.getUi();
         ui.alert('Error', "No se ha encontrado una Hoja Principal para esta hoja RT: " + "\"" + spreadsheetName.substring(3) +"\"", ui.ButtonSet.OK);
+      } else {
+              var sourceSheetName = sourceSheet.getName();
       }
 
       destinationSheet.getRange('A1:D8').clear();
