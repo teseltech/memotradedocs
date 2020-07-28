@@ -147,6 +147,7 @@ function LlenarRT() {
 
     if (spreadsheetName.substring(0,2) == 'RT') {
       var sourceSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(spreadsheetName.substring(3).trim());
+      var sourceSheetName = sourceSheet.getName();
       var destinationSheet = spreadsheet;
 
       if(sourceSheet==null) {
@@ -154,13 +155,15 @@ function LlenarRT() {
         ui.alert('Error', "No se ha encontrado una Hoja Principal para esta hoja RT: " + "\"" + spreadsheetName.substring(3) +"\"", ui.ButtonSet.OK);
       }
 
-      sourceSheet.getRange('H1:K2').copyTo(destinationSheet.getRange('A1'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      destinationSheet.getRange('A1:D8').clear();
+
+      destinationSheet.getRange('A1').setValue("=ARRAYFORMULA('" + sourceSheetName + "'!H1:K2)");
       sourceSheet.getRange('H1:K2').copyTo(destinationSheet.getRange('A1'), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
 
-      sourceSheet.getRange('H4:K5').copyTo(destinationSheet.getRange('A4'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      destinationSheet.getRange('A4').setValue("=ARRAYFORMULA('" + sourceSheetName + "'!H4:K5)");
       sourceSheet.getRange('H4:K5').copyTo(destinationSheet.getRange('A4'), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
 
-      sourceSheet.getRange('H7:K8').copyTo(destinationSheet.getRange('A7'), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+      destinationSheet.getRange('A7').setValue("=ARRAYFORMULA('" + sourceSheetName + "'!H7:K8)");
       sourceSheet.getRange('H7:K8').copyTo(destinationSheet.getRange('A7'), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
     }
 
